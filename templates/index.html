@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Car Information</title>
+  </head>
+  <body>
+    <header>
+      <video src="/static/images/hero.mp4" autoplay muted></video>
+      <nav>
+        <div class="logo">
+          <li><img src="/static/images/RENTAAAL.png" alt="Logo" /></li>
+        </div>
+        <ul>
+          <li><a href="index.html">Acceuil</a></li>
+          <li><a href="">Pourquoi Nous?</a></li>
+          <li><a href="">Offres</a></li>
+          <li><a href="">Voitures</a></li>
+        </ul>
+        <div class="log">
+          {% if username %}
+          <li><a href="#">{{ username }}</a></li>
+          <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+          {% else %}
+          <li><a href="{{ url_for('login') }}">LogIn</a></li>
+          {% endif %}
+        </div>
+      </nav>
+      <section class="search">
+        <div class="location">
+          <input type="text" placeholder="Location" />
+        </div>
+        <div class="date">
+          <input type="date" />
+        </div>
+        <div class="srbtn">
+          <a href="#">Rechercher</a>
+        </div>
+      </section>
+    </header>
+    <section class="vendeurs">
+      <div class="title">
+        <h1>NOS MEILLUER <span>VENDEURS</span></h1>
+      </div>
+      <div class="marks">
+        <div class="carslogo"></div>
+      </div>
+    </section>
+    <section class="why">
+      <h1>POURQUOI CHOISI <span>RENTAAAL</span></h1>
+      <div class="reasons">
+        <div class="car">
+          <img src="/static/images/forcar.png" alt="" />
+        </div>
+        <div class="divreasons">
+          <div class="card">
+            <img src="/static/images/Easy.png" />
+            <div class="info">
+              <h1>FACILE À LOUER</h1>
+              <p>
+                Bienvenue sur notre site ! Louer une voiture n'a jamais été
+                aussi facile avec notre processus de réservation simplifié en
+                deux étapes.
+              </p>
+            </div>
+          </div>
+          <div class="card">
+            <img src="/static/images/Calendar.png" />
+            <div class="info">
+              <h1>OBTENEZ VOTRE VOITURE À TEMPS</h1>
+              <p>
+                Réservez avec nous et soyez assuré de recevoir votre voiture à
+                l'heure convenue, pour un départ sans retard et en toute
+                tranquillité.
+              </p>
+            </div>
+          </div>
+          <div class="card">
+            <img src="/static/images/Earth Planet.png" />
+            <div class="info">
+              <h1>ALLER PARTOUT</h1>
+              <p>
+                Découvrez le Maroc sans limites avec notre application, votre
+                compagnon de voyage pour explorer chaque recoin du pays.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="voitures">
+      <h1>CERTAINES DE NOS <span>VOITURES</span></h1>
+      <div class="cards">
+        {% for car in cars %}
+        <div class="carcards">  
+          <img src="{{car.image_url}}" alt="" />
+          <div class="infos">
+            <h2>{{car.marque}} {{car.modele}}</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
+              fuga pariatur, nisi non fugit explicabo? Recusandae in nam magni
+              natus, quia fuga libero at, perferendis debitis quos vitae
+              architecto cupiditate!
+            </p>
+            <div class="resbtns">
+              <a href="">Reservé</a>
+              <a href="">Voir plus ></a>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+      </div>
+      <div class="heading">
+        <a href="{{ url_for('detail') }}">Voir Plus ></a>
+      </div>
+    </section>
+    <section class="howitworks">
+      <h1>COMMENT FONCTIONNE <span>RENTAAAL</span></h1>
+      <div class="imageAnime">
+        <img id="img" src="/static/images/2018-ford-focus-s_1.png" />
+      </div>
+      <div class="newcards">
+        <div class="card2">
+          <img src="/static/images/Choose.png" />
+          <p>
+            Découvrez notre sélection variée de voitures, de l'économique au
+            haut de gamme. Choisissez le véhicule qui vous convient le mieux,
+            puis réservez facilement en ligne. Nous rendons le processus simple
+            et transparent pour que vous puissiez prendre la route sans souci.
+          </p>
+        </div>
+        <div class="card2">
+          <img src="/static/images/Card Payment.png" />
+          <p>
+            Une fois que vous avez sélectionné votre voiture idéale, le paiement
+            est simple et sécurisé. Vous pouvez régler en ligne en toute
+            tranquillité d'esprit, bénéficiant de différentes options de
+            paiement pour votre confort. Nous veillons à ce que votre expérience
+            de location soit aussi fluide que possible, de la réservation au
+            paiement.
+          </p>
+        </div>
+        <div class="card2">
+          <img src="/static/images/Confetti.png" />
+          <p>
+            Bravo pour votre décision de louer avec nous ! Nous sommes
+            impatients de vous fournir un service exceptionnel. Que votre voyage
+            soit rempli d'explorations passionnantes et de souvenirs
+            inoubliables !
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="testimoniale">
+      <h1>CE QUE NOS CLIENTS DISENT DE <span>RENTAAAL</span></h1>
+      <div class="customers">
+        <div class="test test-1">
+          <h1><span>“</span>Asmae Ben-baali<span>”</span></h1>
+          <div class="imgTest">
+            <img src="/static/images/asmae.jpeg" alt="">
+          </div>
+          <div class="para">
+            <p><span>“</span>RENTAAAL se distingue par son engagement inégalé envers l'excellence et sa qualité exceptionnelle, dépassant toutes les attentes.<span>”</span></p>
+          </div>
+        </div>
+        <div class="test test-2">
+          <h1><span>“</span>Youssef El Haouil<span>”</span></h1>
+          <div class="imgTest">
+            <img src="/static/images/elhaouil.jpeg" alt="">
+          </div>
+          <div class="para">
+            <p><span>“</span>RENTAAAL se distingue par son engagement exceptionnel envers la satisfaction client et la qualité de ses produits, offrant une expérience inégalée. Je recommande vivement leurs services à tous ceux en quête d'excellence.<span>”</span></p>
+          </div>
+        </div>
+        <div class="test test-3">
+          <h1><span>“</span>Talal Ait-Mouh<span>”</span></h1>
+          <div class="imgTest">
+            <img src="/static/images/talal.jpeg" alt="">
+          </div>
+          <div class="para">
+            <p><span>“</span>Avec son dévouement inébranlable envers la qualité et son service client exemplaire, RENTAAAL se démarque comme un choix incontournable. Leur expertise et leur engagement en font le partenaire idéal pour toutes vos nécessités commerciales.<span>”</span></p>
+          </div>
+        </div>
+        </div>
+        
+      </div>
+    </section>
+    <section class="place">
+      <div class="frame">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3422.564157245403!2d-6.930707336698581!3d30.926804549780854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdbb1be52b8237f7%3A0xe12e05d60a8a8bb!2sRAYANO%20CAR!5e0!3m2!1sen!2sma!4v1714303794459!5m2!1sen!2sma" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="landingForm">
+        <h2>Contactez Nous!</h2>
+        <form class="formLanding">
+            <div class="nom">
+              <label for="nom">nom</label>
+              <input type="text" placeholder="Nom">
+            </div>
+            <div class="nom">
+              <label for="nom">Prenom</label>
+              <input type="text" placeholder="Prenom">
+            </div>
+            <div class="nom">
+              <label for="telephone">Telephone</label>
+              <input type="tel" placeholder="+212 000 00 00 00">
+            </div>
+            <div class="nom">
+              <label for="emai">Email</label>
+            <input type="email" placeholder="example@domain.com">
+            </div>
+            <div class="nom">
+              <label for="emai">FeedBack</label>
+              <textarea name="textarea" placeholder="Your Feedback" cols="35" rows="10"></textarea>
+            </div>
+            <button type="button">
+              Envoyer!
+            </button>
+        </form>
+      </div>
+    </section>
+    <footer>
+      <div class="ftr">
+        <img src="/static/images/RENTAAAL.png" alt="">
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum quos iste reiciendis ea dolore fugit.</p>
+      </div>
+      <div class="ftr">
+        <h1>Company</h1>
+        <li><a href="">Home</a></li>
+        <li><a href="">Pourquoi Nous?</a></li>
+        <li><a href="">Offres</a></li>
+        <li><a href="">Voitures</a></li>
+      </div>
+      <div class="ftr">
+        <h1>Aide</h1>
+        <li><a href="">Assistance personnalisée</a></li>
+        <li><a href="">Comment ça fonctionne</a></li>
+        <li><a href="">Termes et conditions</a></li>
+        <li><a href="">politique de confidentialité</a></li>
+      </div>
+      <div class="ftr">
+        <h1>Envoyer Un Message</h1>
+        <div class="ftr-write">
+          <input type="text" placeholder="Ecrivez Votre Message ici">
+          <i class="fa-solid fa-arrow-right" style="color: #ffffff;"></i>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="{{url_for ('static', filename='app.js')}}"></script>
+  </body>
+</html>

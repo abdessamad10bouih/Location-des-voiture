@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{url_for ('static', filename='detail.css')}}"
+    />
+    <title>Les Voitures</title>
+  </head>
+  <body>
+    <script>
+      function searchCars() {
+        var input, filter, cards, card, title, i;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        cards = document.getElementsByClassName("card");
+
+        for (i = 0; i < cards.length; i++) {
+          card = cards[i];
+          title = card.getElementsByTagName("h2")[0];
+          if (title.innerText.toUpperCase().indexOf(filter) > -1) {
+          } else {
+            card.style.display = "none";
+          }
+        }
+      }
+    </script>
+    <nav>
+      <div class="logo">
+        <li><img src="/static/images/RENTAAAL.png" alt="Logo" /></li>
+      </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="">Pourquoi Nous?</a></li>
+        <li><a href="">Deals</a></li>
+        <li><a href="">Voitures</a></li>
+      </ul>
+      <div class="log">
+        {% if username %}
+        <li><a href="#">{{ username }}</a></li>
+        <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+        {% else %}
+        <li><a href="{{ url_for('login') }}">LogIn</a></li>
+        {% endif %}
+      </div>
+    </nav>
+    <div class="container">
+      <aside>
+        <div class="search">
+          <input
+            type="text"
+            onkeyup="searchCars()"
+            id="searchInput"
+            placeholder="Recherche"
+          />
+        </div>
+        <h2>Prix</h2>
+        <div class="prix">
+          <input type="number" placeholder="Min" />
+          <input type="number" placeholder="Max" />
+        </div>
+        <div class="btns">
+          <a href="">Recherche</a>
+        </div>
+      </aside>
+      <div class="voitures">
+        {% for voiture in voitures %}
+        <div class="card">
+          <img src="{{voiture.image_url}}"/>
+          <h2>{{voiture.marque}} {{voiture.modele}}</h2>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+          <div class="btns">
+                <a href="{{ url_for('detailVoiture', car_id=voiture.id) }}">Voir Plus ></a> 
+
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>

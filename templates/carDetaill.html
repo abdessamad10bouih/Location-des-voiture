@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ car.marque }} {{ car.modele }}</title>
+    <link
+      rel="stylesheet"
+      href="{{url_for ('static', filename='detail.css')}}"
+    />
+</head>
+<body>
+    <nav>
+      <div class="logo">
+        <li><img src="/static/images/RENTAAAL.png" alt="Logo" /></li>
+      </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="">Pourquoi Nous?</a></li>
+        <li><a href="">Deals</a></li>
+        <li><a href="">Voitures</a></li>
+      </ul>
+      <div class="log">
+        {% if username %}
+        <li><a href="#">{{ username }}</a></li>
+        <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+        {% else %}
+        <li><a href="{{ url_for('login') }}">LogIn</a></li>
+        {% endif %}
+      </div>
+    </nav>
+    <div class="reserveContainer">
+        <div class="billing">
+            <form action="{{ url_for('reserve_car', car_id=car.id) }}" method="post">
+                <h1>Réserver {{ car.marque }} {{ car.modele }}</h1>
+                <label for="Nom">Nom</label>
+                <input type="text" name="nom" id="nom">
+                <label for="prenom">Prenom</label>
+                <input type="text" name="prenom" id="prenom">
+                <label for="email">email</label>
+                <input type="email" name="email" id="email">
+                <label for="telephone">Telephone</label>
+                <input type="tel" name="telephone" id="telephone">
+                <div class="bottona">
+                  <button type="submit">Reservé</button>
+                </div>
+            </form>
+        </div>
+        <div class="voiture">
+            <div class="voitureImage">
+                <img src="/{{car.image_url}}" alt="">
+            </div>
+            <div class="voitureInfor">
+              <li>Marque : {{ car.marque }}</li>
+              <li>Modele : {{ car.modele }}</li>
+              <li>Categorie : {{ car.categorie}}</li>
+              <li>Prix : {{ car.prix}}DH/J</li>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
